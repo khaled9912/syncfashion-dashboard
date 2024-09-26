@@ -6,8 +6,8 @@
 
 1. 🤖 [Introduction](#introduction)
 2. ⚙️ [Tech Stack](#tech-stack)
-3. 🤸 Quick Start
-4. 🕸️ Code Snippets to Copy 
+3. 🤸 [Quick Start](#quick-start)
+4. 🕸️ [Code Snippets to Copy](#snippets)
 
 
 ## <a name="introduction">🤖 Introduction</a>
