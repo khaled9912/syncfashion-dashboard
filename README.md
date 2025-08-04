@@ -1,70 +1,217 @@
-# Getting Started with Create React App
+  <h3 align="center">Admin Dashboard App</h3>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## 📋 <a name="table">Table of Contents</a>
 
-### `npm start`
+1. 🤖 [Introduction](#introduction)
+2. ⚙️ [Tech Stack](#tech-stack)
+3. 🤸 [Quick Start](#quick-start)
+4. 🕸️ [Code Snippets to Copy](#snippets)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## <a name="introduction">🤖 Introduction</a>
 
-### `npm test`
+Built with React, this app is a built With Theming, Tables, Charts, Calendar, Kanban and More.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## <a name="tech-stack">⚙️ Tech Stack</a>
 
-### `npm run build`
+- React.js
+- Javascript
+- Chart.js
+- Syncfashion
+  
+## <a name="quick-start">🤸 Quick Start</a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these steps to set up the project locally on your machine.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Prerequisites**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Make sure you have the following installed on your machine:
 
-### `npm run eject`
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Cloning the Repository**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/khaled9912/syncfashion-dashboard
+cd syncfashion-dashboard
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Installation**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Install the project dependencies using npm:
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Running the Project**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## <a name="snippets">🕸️ Snippets</a>
 
-### Analyzing the Bundle Size
+<details>
+<summary><code>SideNav</code></summary>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```SideNav
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { SiShopware } from 'react-icons/si';
+import { MdOutlineCancel } from 'react-icons/md';
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-### Making a Progressive Web App
+import { links } from '../data/dummy';
+import { useStateContext } from '../contexts/ContextProvider';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+const Sidebar = () => {
+  const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
 
-### Advanced Configuration
+  const handleCloseSideBar = () => {
+    if (activeMenu !== undefined && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2';
+  const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
 
-### Deployment
+  return (
+    <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
+      {activeMenu && (
+        <>
+          <div className="flex justify-between items-center">
+            <Link to="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
+              <SiShopware /> <span>Shoppy</span>
+            </Link>
+            <TooltipComponent content="Menu" position="BottomCenter">
+              <button
+                type="button"
+                onClick={() => setActiveMenu(!activeMenu)}
+                style={{ color: currentColor }}
+                className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
+              >
+                <MdOutlineCancel />
+              </button>
+            </TooltipComponent>
+          </div>
+          <div className="mt-10 ">
+            {links.map((item) => (
+              <div key={item.title}>
+                <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
+                  {item.title}
+                </p>
+                {item.links.map((link) => (
+                  <NavLink
+                    to={`/${link.name}`}
+                    key={link.name}
+                    onClick={handleCloseSideBar}
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? currentColor : '',
+                    })}
+                    className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  >
+                    {link.icon}
+                    <span className="capitalize ">{link.name}</span>
+                  </NavLink>
+                ))}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+export default Sidebar;
+```
 
-### `npm run build` fails to minify
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<details>
+<summary><code>Chart</code></summary>
+
+```ChartJsimport React from 'react';
+import { MdOutlineCancel } from 'react-icons/md';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+
+import { useStateContext } from '../contexts/ContextProvider';
+import { cartData } from '../data/dummy';
+import { Button } from '.';
+
+const Cart = () => {
+  const { currentColor } = useStateContext();
+
+  return (
+    <div className="bg-half-transparent w-full fixed nav-item top-0 right-0 ">
+      <div className="float-right h-screen  duration-1000 ease-in-out dark:text-gray-200 transition-all dark:bg-[#484B52] bg-white md:w-400 p-8">
+        <div className="flex justify-between items-center">
+          <p className="font-semibold text-lg">Shopping Cart</p>
+          <Button
+            icon={<MdOutlineCancel />}
+            color="rgb(153, 171, 180)"
+            bgHoverColor="light-gray"
+            size="2xl"
+            borderRadius="50%"
+          />
+        </div>
+        {cartData?.map((item, index) => (
+          <div key={index}>
+            <div>
+              <div className="flex items-center   leading-8 gap-5 border-b-1 border-color dark:border-gray-600 p-4">
+                <img className="rounded-lg h-80 w-24" src={item.image} alt="" />
+                <div>
+                  <p className="font-semibold ">{item.name}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold">{item.category}</p>
+                  <div className="flex gap-4 mt-2 items-center">
+                    <p className="font-semibold text-lg">{item.price}</p>
+                    <div className="flex items-center border-1 border-r-0 border-color rounded">
+                      <p className="p-2 border-r-1 dark:border-gray-600 border-color text-red-600 "><AiOutlineMinus /></p>
+                      <p className="p-2 border-r-1 border-color dark:border-gray-600 text-green-600">0</p>
+                      <p className="p-2 border-r-1 border-color dark:border-gray-600 text-green-600"><AiOutlinePlus /></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="mt-3 mb-3">
+          <div className="flex justify-between items-center">
+            <p className="text-gray-500 dark:text-gray-200">Sub Total</p>
+            <p className="font-semibold">$890</p>
+          </div>
+          <div className="flex justify-between items-center mt-3">
+            <p className="text-gray-500 dark:text-gray-200">Total</p>
+            <p className="font-semibold">$890</p>
+          </div>
+        </div>
+        <div className="mt-5">
+          <Button
+            color="white"
+            bgColor={currentColor}
+            text="Place Order"
+            borderRadius="10px"
+            width="full"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Cart;
+```
+
+</details>
+
+
+
