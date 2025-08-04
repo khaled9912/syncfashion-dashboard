@@ -7,7 +7,10 @@
 1. 🤖 [Introduction](#introduction)
 2. ⚙️ [Tech Stack](#tech-stack)
 3. 🤸 [Quick Start](#quick-start)
+4. 🚀 [Live Demo](#LiveDemo)
 4. 🕸️ [Code Snippets to Copy](#snippets)
+ 
+
 
 
 ## <a name="introduction">🤖 Introduction</a>
@@ -54,7 +57,11 @@ npm install
 npm start
 ```
 
+
+
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+
+## <a name="LiveDemo" href='https://syncfusion-dashboard.netlify.app'>🚀 LiveDemo</a>
 
 ## <a name="snippets">🕸️ Snippets</a>
 
